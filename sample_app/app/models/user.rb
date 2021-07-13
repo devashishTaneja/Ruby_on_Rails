@@ -10,7 +10,8 @@ class User < ApplicationRecord
     # doesnot ensure uniqueness at database level
     # simultaneous requests
     has_secure_password
-    # validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+    validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+    
     def remember
         self.remember_token = SecureRandom.urlsafe_base64
         self.update_column(:remember_digest, BCrypt::Password.create(remember_token))

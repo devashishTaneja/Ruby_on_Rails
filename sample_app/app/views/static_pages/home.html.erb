@@ -4,5 +4,21 @@
   <h2>
     Sample user micropost application.
   </h2>
-  <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+</div>
+
+<div class="center">
+	<% if logged_in? %>
+		<ol>
+			<% @users.each do |user| %>
+				<li>
+					<%= gravatar_for user %>
+					<h1><%= user.name %></h1>
+					<%= link_to "view my profile", user %>
+					<b>Microposts:</b> <%= user.microposts.count %>
+				</li>
+			<% end %>
+		</ol>
+	<% elsif %>
+		<%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+	<%end%>
 </div>

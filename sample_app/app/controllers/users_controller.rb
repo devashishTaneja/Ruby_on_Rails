@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find(params[:id])
-        @microposts = @user.microposts.paginate(page: params[:page])
+        # @microposts = @user.microposts.paginate(page: params[:page])
     end
 
     def edit
@@ -23,12 +23,11 @@ class UsersController < ApplicationController
     end
 
     def update
-        @user = User.new(user_params)
+        @user = current_user
         if @user.update(user_params)
-            flash[:success] = "Updated user "+@user.name+" !"
-            redirect_to @user
+            redirect_to profile_url
         else
-            render 'edit'
+            render 'new'
         end
     end
 
